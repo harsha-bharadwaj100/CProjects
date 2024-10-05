@@ -48,6 +48,71 @@ void insertLast(NODE *head, int data)
     iter->next = temp;
 }
 
+void deleteLast(NODE *head)
+{
+    if (*head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    if ((*head)->next == NULL)
+    {
+        free(*head);
+        *head = NULL;
+        return;
+    }
+    NODE iter = *head;
+    while (iter->next->next != NULL)
+    {
+        iter = iter->next;
+    }
+    free(iter->next);
+    iter->next = NULL;
+    return;
+}
+
+void insertAt(NODE *head, int data, int pos)
+{
+    if (*head == NULL)
+    {
+        insertFirst(NULL, data);
+        return;
+    }
+    NODE temp = (NODE)malloc(sizeof(struct Node));
+    temp->data = data;
+    NODE iter = *head;
+    for (int i = 0; i < pos - 1; i++)
+    {
+        iter = iter->next;
+    }
+    temp->next = iter->next;
+    iter->next = temp;
+    return;
+}
+
+void deleteAt(NODE *head, int pos)
+{
+    if (*head == NULL)
+    {
+        printf("List is empty\n");
+        return;
+    }
+    if ((*head)->next == NULL)
+    {
+        deleteFirst(head);
+        return;
+    }
+    NODE iter = *head;
+    for (int i = 0, j = pos; i < pos - 1 && iter->next != NULL; i++)
+    {
+        iter = iter->next;
+    }
+    NODE temp = iter->next;
+    iter->next = temp->next;
+    free(temp);
+    return;
+}
+
 void display(NODE head)
 {
     NODE temp = head;
@@ -64,10 +129,10 @@ int main()
 {
     NODE head = NULL;
     int choice;
-    int data;
+    int data, pos;
     while (1)
     {
-        printf("1. Insert First\n2. Delete First\n3. Display\n4. Insert Last\n");
+        printf("1. Insert First\n2. Delete First\n3. Display\n4. Insert Last\n5. Delete Last\n6. Insert At\n7. Delete At\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice)
@@ -89,6 +154,21 @@ int main()
             insertLast(&head, data);
             break;
             return 0;
+        case 5:
+            deleteLast(&head);
+            break;
+        case 6:
+            printf("Enter data: ");
+            scanf("%d", &data);
+            printf("Enter position: ");
+            scanf("%d", &pos);
+            insertAt(&head, data, pos);
+            break;
+        case 7:
+            printf("Enter position: ");
+            scanf("%d", &pos);
+            deleteAt(&head, pos);
+            break;
         default:
             exit(0);
         }
