@@ -9,39 +9,38 @@ struct Node
 
 typedef struct Node *NODE;
 
-NODE insertFirst(NODE head, int data)
+void insertFirst(NODE *head, int data)
 {
     NODE temp = (NODE)malloc(sizeof(struct Node));
     temp->data = data;
-    temp->next = head;
-    return temp;
+    temp->next = *head;
+    *head = temp;
 }
 
-NODE deleteFirst(NODE head)
+void deleteFirst(NODE *head)
 {
-    if (head == NULL)
+    if (*head == NULL)
     {
         printf("List is empty\n");
-        return head;
+        return;
     }
-    NODE temp = (NODE)malloc(sizeof(struct Node));
-    temp = head;
-    head = head->next;
+    NODE temp = *head;
+    *head = (*head)->next;
     free(temp);
-    return head;
+    return;
 }
 
-void insertLast(NODE head, int data)
+void insertLast(NODE *head, int data)
 {
-    if (head == NULL)
+    if (*head == NULL)
     {
-        head = insertFirst(head, data);
+        insertFirst(NULL, data);
         return;
     }
     NODE temp = (NODE)malloc(sizeof(struct Node));
     temp->data = data;
     temp->next = NULL;
-    NODE iter = head;
+    NODE iter = *head;
     while (iter->next != NULL)
     {
         iter = iter->next;
@@ -51,8 +50,7 @@ void insertLast(NODE head, int data)
 
 void display(NODE head)
 {
-    NODE temp = (NODE)malloc(sizeof(struct Node));
-    temp = head;
+    NODE temp = head;
     printf("List: ");
     while (temp != NULL)
     {
@@ -77,10 +75,10 @@ int main()
         case 1:
             printf("Enter data: ");
             scanf("%d", &data);
-            head = insertFirst(head, data);
+            insertFirst(&head, data);
             break;
         case 2:
-            head = deleteFirst(head);
+            deleteFirst(&head);
             break;
         case 3:
             display(head);
@@ -88,7 +86,7 @@ int main()
         case 4:
             printf("Enter data: ");
             scanf("%d", &data);
-            insertLast(head, data);
+            insertLast(&head, data);
             break;
             return 0;
         default:
