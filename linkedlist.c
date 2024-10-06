@@ -81,7 +81,7 @@ void insertAt(NODE *head, int data, int pos)
     NODE temp = (NODE)malloc(sizeof(struct Node));
     temp->data = data;
     NODE iter = *head;
-    for (int i = 0; i < pos - 1; i++)
+    for (int i = 0; i < pos - 1 && iter->next != NULL; i++)
     {
         iter = iter->next;
     }
@@ -103,7 +103,7 @@ void deleteAt(NODE *head, int pos)
         return;
     }
     NODE iter = *head;
-    for (int i = 0, j = pos; i < pos - 1 && iter->next != NULL; i++)
+    for (int i = 0; i < pos - 1 && iter->next->next != NULL; i++)
     {
         iter = iter->next;
     }
