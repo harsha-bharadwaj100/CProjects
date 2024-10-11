@@ -62,6 +62,3 @@ if __name__ == "__main__":
 
     # Function call
     print("postfix evaluation: %d" % (obj.evaluatePostfix(exp)))
-
-
-# This code is contributed by Nikhil Kumar Singh(nickzuck_007)

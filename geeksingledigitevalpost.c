@@ -102,9 +102,9 @@ float evaluatePostfix(char *exp)
 // Driver code
 int main()
 {
-    char exp[] = "231*+9-2/";
+    char exp[] = "231*+9-";
 
     // Function call
-    printf("postfix evaluation: %f", evaluatePostfix(exp));
+    printf("postfix evaluation: %d", evaluatePostfix(exp));
     return 0;
 }
