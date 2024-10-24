@@ -6,11 +6,11 @@
 
 #define MAX 100
 
-char S[MAX];
-int top = -1, end = 0;
+double S[MAX];
+int top = -1;
 
 // Function to push an element onto the stack
-void push(char value)
+void push(double value)
 {
     if (top == MAX - 1)
     {
@@ -20,19 +20,8 @@ void push(char value)
     S[++top] = value;
 }
 
-// void append(char value)
-// {
-//     if (end == MAX - 1)
-//     {
-//         printf("postfix overflow\n");
-//         return;
-//     }
-//     post[end++] = value;
-//     // post[end + 1] = '\0';
-// }
-
 // Function to pop an element from the stack
-char pop()
+double pop()
 {
     if (top == -1)
     {
@@ -43,7 +32,7 @@ char pop()
 }
 
 // Function to get the top element of the stack
-char peek()
+double peek()
 {
     if (top == -1)
     {
@@ -55,41 +44,53 @@ char peek()
 // Evaluate the postfix expression
 int main()
 {
-    char post[MAX] = "ABC-D*+E^F+";
+    double op1, op2, result;
+    char post[MAX] = "2.3 3.1 .1*+9-1+2/2/";
     for (int i = 0; post[i] != '\0'; i++)
     {
-        if (isdigit(post[i]) || isalpha(post[i]))
+        if (isdigit(post[i]) || post[i] == '.')
         {
-            push(post[i]);
+            // convert character to double and push it
+            // iterate untill a space is encountered
+            char *startptr = &post[i];
+            char *endptr;
+            double num = strtod(startptr, &endptr);
+            push(num);
+
+            // update the iterator to the end of the number
+            i = endptr - post - 1;
         }
-        else if (post[i] == '+' || post[i] == '-' || post[i] == '*' || post[i] == '/' || post[i] == '^')
+        else if (post[i] == ' ')
         {
-            char op1 = pop();
-            char op2 = pop();
-            char result;
+            continue;
+        }
+        else
+        {
+            op1 = pop();
+            op2 = pop();
             switch (post[i])
             {
             case '+':
-                result = (int)op1 + (int)op2;
+                result = op2 + op1;
                 break;
             case '-':
-                result = (int)op1 - (int)op2;
+                result = op2 - op1;
                 break;
             case '*':
-                result = (int)op1 * (int)op2;
+                result = op2 * op1;
                 break;
             case '/':
-                result = (int)op1 / (int)op2;
+                result = op2 / op1;
                 break;
-            case '^':
-                result = pow((int)op1, (int)op2);
-                break;
+                // case '^':
+                //     result = pow(op1, op2);
+                //     break;
             }
             push(result);
         }
     }
 
     // Print the result
-    printf("Result: %d\n", pop());
+    printf("Result: %lf\n", pop());
     return 0;
 }
