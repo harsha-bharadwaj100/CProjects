@@ -12,7 +12,7 @@ void push(char value, int index)
 {
     if (top == MAX - 1)
     {
-        printf("Stack overflow\n");
+        printf("Stack overflow.\n");
         return;
     }
     top++;
@@ -24,7 +24,7 @@ int pop()
 {
     if (top == -1)
     {
-        printf("Stack underflow\n");
+        printf("Stack underflow.\n");
         return -1;
     }
     return indices[top--];
@@ -34,7 +34,7 @@ char peek()
 {
     if (top == -1)
     {
-        printf("Stack underflow\n");
+        printf("Stack underflow!\n");
         return '\0';
     }
     return parastack[top];
@@ -49,29 +49,31 @@ int main()
 
     int len = strlen(expr);
     int k = 0;
-    int left = 0, right = 0;
     for (int i = 0; i < len; i++)
     {
         if (expr[i] == '(' || expr[i] == '[' || expr[i] == '{')
         {
             push(expr[i], i);
-            left++;
         }
         else if (expr[i] == ')' || expr[i] == ']' || expr[i] == '}')
         {
-            right++;
             if (peek() == '(' && expr[i] == ')' || peek() == '[' && expr[i] == ']' || peek() == '{' && expr[i] == '}')
             {
                 matches[k][0] = pop();
                 matches[k][1] = i;
                 k++;
             }
+            else
+            {
+                printf("Invalid expression: '%c' at %d has no matching opening bracket.\n", expr[i], i);
+                return 0;
+            }
         }
     }
 
-    if (top == -1 && left == right)
+    if (top == -1)
     {
-        printf("Valid expression\n");
+        printf("Valid expression.\n");
         printf("Matches: %d\n", k);
         for (int i = 0; i < k; i++)
         {
@@ -80,7 +82,7 @@ int main()
     }
     else
     {
-        printf("Invalid expression\n");
+        printf("Invalid expression: %c at %d has no matching closing bracket.\n", expr[top], top);
     }
     return 0;
 }
