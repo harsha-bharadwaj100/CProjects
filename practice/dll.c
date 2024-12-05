@@ -105,42 +105,58 @@ NODE insertAt()
     int pos, data;
     printf("Enter position (1 - %d): ", size + 1);
     scanf("%d", &pos);
-
-    if (pos < 1 || pos > size + 1)
-    {
-        printf("Invalid position\n");
-        return head;
-    }
-
     if (pos == 1)
     {
         return insertFront();
     }
-    else if (pos == size + 1)
+    if (pos == size + 1)
     {
         return insertEnd();
     }
-    else
+    if (pos < 1 && pos > size + 1)
     {
-        NODE cur = head;
-        for (int i = 1; i < pos - 1; i++)
-        {
-            cur = cur->next;
-        }
-        printf("Enter Data: ");
-        scanf("%d", &data);
-        NODE temp = getNode(data);
-        temp->prev = cur;
-        temp->next = cur->next;
-        cur->next->prev = temp;
-        cur->next = temp;
-        size++;
+        printf("Invalid Position!\n");
         return head;
     }
+    NODE cur = head;
+    for (int i = 1; i < pos - 1; i++)
+    {
+        cur = cur->next;
+    }
+    printf("Enter Data: ");
+    scanf("%d", &data);
+    NODE temp = getNode(data);
+    temp->prev = cur;
+    temp->next = cur->next;
+    cur->next->prev = temp;
+    cur->next = temp;
+    size++;
+    return head;
 }
 
 NODE deleteAt()
 {
+    int pos;
+    printf("Enter position (1 - %d): ", size);
+    scanf("%d", &pos);
+    if (pos < 1 || pos > size)
+    {
+        printf("Invalid position\n");
+        return head;
+    }
+    if (pos == 1)
+    {
+        return deleteFront();
+    }
+    else if (pos == size)
+    {
+        return deleteEnd();
+    }
+    NODE cur = head;
+    for (int i = 1; i < pos - 1; i++)
+    {
+        cur = cur->next;
+    }
 }
 
 void search()
