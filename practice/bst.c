@@ -32,8 +32,11 @@ void preOrder(NODE root)
     if (root == NULL)
         return;
     printf("%d ", root->data);
+    // printf("{");
     preOrder(root->left);
+    // printf(",");
     preOrder(root->right);
+    // printf("}");
 }
 
 void postOrder(NODE root)
@@ -56,6 +59,37 @@ NODE binarySearchInsert(NODE root, int data)
     return root;
 }
 
+void search(NODE root, int data)
+{
+    if (root == NULL)
+        return;
+    search(root->left, data);
+    if (root->data == data)
+    {
+        printf("found! %d\n", root->data);
+        return;
+    }
+    search(root->right, data);
+}
+
+void min(NODE root)
+{
+    while (root->left != NULL)
+    {
+        root = root->left;
+    }
+    printf("min: %d\n", root->data);
+}
+
+void max(NODE root)
+{
+    while (root->right != NULL)
+    {
+        root = root->right;
+    }
+    printf("max: %d\n", root->data);
+}
+
 int main()
 {
     int btree[] = {6, 9, 5, 2, 8, 15, 24, 14, 7, 5, 2};
@@ -71,5 +105,37 @@ int main()
     preOrder(root);
     printf("\nPostorder: ");
     postOrder(root);
+    printf("\n");
+
+    search(root, 2);
+    printf("\n");
+    min(root);
+    max(root);
     return 0;
 }
+// 6
+// {
+//     5 {
+//         2 {
+//             ,
+//         },
+//     },
+//         9
+//     {
+//         8 {
+//             7 {
+//                 ,
+//             },
+//         },
+//             15
+//         {
+//             14 {
+//                 ,
+//             },
+//                 24
+//             {
+//                 ,
+//             }
+//         }
+//     }
+// }
