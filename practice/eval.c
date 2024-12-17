@@ -39,7 +39,7 @@ float peek()
 
 int main()
 {
-    char post[MAX] = "231*+9-1+2/";
+    char post[MAX] = "231*+9-3/1+";
     float a, b;
     for (int i = 0; post[i] != '\0'; i++)
     {

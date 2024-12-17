@@ -5,7 +5,7 @@ int adj[10][10], n;
 void bfs(int start)
 {
     int queue[10], front = -1, rear = -1, visited[10] = {0};
-    queue[rear++] = start;
+    queue[++rear] = start;
     visited[start] = 1;
     printf("Nodes reached from %d: ", start);
     while (front < rear)
@@ -17,7 +17,7 @@ void bfs(int start)
             if (adj[cur][i] == 1 && visited[i] == 0) // dealing with i and not cur
             {
                 visited[i] = 1;    // dealing with i and not cur
-                queue[rear++] = i; // dealing with i and not cur
+                queue[++rear] = i; // dealing with i and not cur
             }
         }
     }

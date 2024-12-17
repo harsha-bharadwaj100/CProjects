@@ -45,7 +45,7 @@ double peek()
 int main()
 {
     double op1, op2, result;
-    char post[MAX] = "2.3 3.1 .1*+9-1+2/2/";
+    char post[MAX] = "2.3 31.1 .1*+9-1+2/2/";
     for (int i = 0; post[i] != '\0'; i++)
     {
         if (isdigit(post[i]) || post[i] == '.')
