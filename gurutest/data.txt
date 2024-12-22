@@ -1,0 +1,10 @@
+Alice 23
+Bob 21
+Charlie 13
+Daisy 3
+Eve 12
+Frank 5
+Grace 17
+Hannah 7
+Ivan 18
+Jack 2
