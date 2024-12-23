@@ -15,15 +15,15 @@ int main()
             scanf("%d", &matrix[i][j]);
         }
     }
-    printf("Sparse Matrix:\n");
-    for (int i = 0; i < rows; i++)
-    {
-        for (int j = 0; j < cols; j++)
-        {
-            printf("%d ", matrix[i][j]);
-        }
-        printf("\n");
-    }
+    // printf("Sparse Matrix:\n");
+    // for (int i = 0; i < rows; i++)
+    // {
+    //     for (int j = 0; j < cols; j++)
+    //     {
+    //         printf("%d ", matrix[i][j]);
+    //     }
+    //     printf("\n");
+    // }
     int k = 0;
     for (int i = 0; i < rows; i++)
     {

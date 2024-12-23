@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 // Implementaion of sparse matrix
 #define MAX 10
@@ -10,6 +9,7 @@ int main()
     int triplet[MAX * MAX][3];
 
     printf("Enter the number of rows and columns of the matrix: ");
+    fflush(stdout);
     scanf("%d %d", &rows, &cols);
 
     printf("Enter the elements of the matrix: \n");
