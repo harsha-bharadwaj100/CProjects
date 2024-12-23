@@ -18,8 +18,9 @@ void createArray()
 void insert()
 {
     int pos, data;
-    printf("Enter a valid position (0 - %d): ", size);
+    printf("Enter a valid position (1 - %d): ", size);
     scanf("%d", &pos);
+    pos--;
     printf("Enter data: ");
     scanf("%d", &data);
     if (pos < 0 || pos > size)
@@ -55,6 +56,7 @@ void delete()
     int pos;
     printf("Enter position to delete: ");
     scanf("%d", &pos);
+    pos--;
     if (pos < 0 || pos > size)
     {
         printf("Invalid position!\n");
