@@ -45,6 +45,7 @@ void insertEnd()
     if (head == NULL)
     {
         head = temp;
+        return;
     }
     NODE cur = head;
     while (cur->next != NULL)
@@ -63,9 +64,9 @@ void deleteEnd()
     }
     if (head->next == NULL)
     {
-        NODE cur = head;
+        // NODE cur = head;
+        free(head);
         head = NULL;
-        free(cur);
         return;
     }
     NODE cur = head;
